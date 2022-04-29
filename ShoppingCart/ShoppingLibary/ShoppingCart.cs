@@ -1,38 +1,50 @@
-﻿using System.Collections.Generic;
+﻿
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ShoppingLibrary
 {
-    public class ShoppingCartItem //animals
+    public class ShoppingCart //zoo
     {
-        //variables for the name of item and price
-        public string _name;
-        public double _price;
 
-        public string Name
-        {
-            get
-            {
-                return _name;
-            }
-        }
+        List<ShoppingCartItem> _ShoppingCartItems = new List<ShoppingCartItem>();
 
-        public double Price
+  
+
+
+        public void AddShoppingItem(ShoppingCartItem item)
         {
-            get
-            {
-                return _price;
-            }
+            _ShoppingCartItems.Add(item);
         }
 
 
-        public ShoppingCartItem(string name, double price)
+        public double GetSubTotal()
         {
-            //create the item and price//Flexible code so that it can take any item in and a price
-            _name = name;
-            _price = price;
+            double total = 0;
+
+            foreach (ShoppingCartItem shoppingCart in _ShoppingCartItems)
+            {
+                total = total + shoppingCart.Price;
+            }
+            return total;
+        }
+
+
+        public double GetVat()
+        {
+            double vat = 0;
+
+            vat += 1.15 * GetSubTotal();
+
+            return vat;
+        }
+
+        public List<ShoppingCartItem> ShoppingCartItems()
+        {
+            return _ShoppingCartItems;  
         }
     }
 }
